@@ -17,8 +17,14 @@ namespace KuasCore.Interceptors
             Debug.Print("DebogLogInterceptor 攔截到一個方法呼叫 = [{0}]", invocation);
 
             object result = invocation.Proceed();
-            Employee employee = (Employee)result;
-            employee.Name= employee.Name+ "老師~~~~~~";
+            if (result is Employee) //check 是否為 Employee 型態
+            {
+                    Employee employee = (Employee)result;
+                    employee.Name= employee.Name+ "老師~~~~~~";
+
+                    result = employee;
+            }
+            
             Console.WriteLine("回傳的資料已取得 [{0}]", result);
             
             Debug.Print("回傳的資料已取得 [{0}]", result);
